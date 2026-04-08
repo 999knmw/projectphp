@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Received Data</title>
+    <title>Job Application Received</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 600px;
+            max-width: 700px;
             margin: 50px auto;
             padding: 20px;
             background-color: #f4f4f4;
@@ -23,6 +23,10 @@
             border-bottom: 2px solid #4CAF50;
             padding-bottom: 10px;
         }
+        h3 {
+            color: #4CAF50;
+            margin-top: 20px;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -34,9 +38,9 @@
             border-bottom: 1px solid #ddd;
         }
         th {
-            background-color: #4CAF50;
+            background-color: #73ba75;
             color: white;
-            width: 30%;
+            width: 35%;
         }
         tr:hover {
             background-color: #f5f5f5;
@@ -58,22 +62,44 @@
             text-align: center;
             padding: 20px;
         }
+        .success {
+            background-color: #dff0d8;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>📨 Data Received via GET Method</h2>
+        <h2>📋 Job Application Submitted</h2>
         
         <?php
         // Check if any data was sent
         if (empty($_GET)) {
-            echo '<div class="error">⚠️ No data received. Please go back and submit the form.</div>';
+            echo '<div class="error">No application data received. Please go back and submit the form.</div>';
         } else {
+            echo '<div class="success"> Thank you for your application! Here\'s what you submitted:</div>';
+            
             // Display the received data in a table
             echo '<table>';
             echo '<tr><th>Field</th><th>Value</th></tr>';
             
-            // Sanitize and display each GET parameter
+            // Define friendly names for each field
+            $fieldNames = [
+                'name' => 'Full Name',
+                'email' => 'Email Address',
+                'phone' => 'Phone Number',
+                'age' => 'Birth Date',
+                'address' => 'Address',
+                'topic' => 'Gender',
+                'job' => 'Desired Job Title',
+                'available' => 'Availability',
+                'locate' => 'Willing to Relocate',
+                'message' => 'Additional Message'
+            ];
+            
+            // Process each field
             foreach ($_GET as $key => $value) {
                 // Skip if value is empty
                 if ($value === "" || $value === null) {
@@ -83,8 +109,12 @@
                     $displayValue = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
                 }
                 
-                // Capitalize the field name for better display
-                $fieldName = ucfirst(str_replace('_', ' ', $key));
+                // Use friendly name if available, otherwise capitalize the key
+                if (isset($fieldNames[$key])) {
+                    $fieldName = $fieldNames[$key];
+                } else {
+                    $fieldName = ucfirst(str_replace('_', ' ', $key));
+                }
                 
                 echo "<tr>";
                 echo "<th>{$fieldName}</th>";
@@ -95,15 +125,12 @@
             echo '</table>';
             
             // Show the raw query string for educational purposes
-            echo '<div style="margin-top: 20px; padding: 10px; background-color: #f0f0f0; border-radius: 4px;">';
-            echo '<strong>🔗 Raw GET Query String:</strong><br>';
-            echo '<code>' . htmlspecialchars($_SERVER['QUERY_STRING']) . '</code>';
-            echo '</div>';
+        
         }
         ?>
         
         <br>
-        <a href="form.html" class="back-link">← Back to Form</a>
+        <a href="form.html" class="back-link">← Back to Application Form</a>
     </div>
 </body>
 </html>

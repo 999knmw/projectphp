@@ -40,7 +40,7 @@
             width: 100%;
             padding: 10px;
             margin-top: 20px;
-            background-color: #4CAF50;
+            background-color: #73ba75;
             color: white;
             border: none;
             border-radius: 4px;
@@ -48,13 +48,13 @@
             font-size: 16px;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #73ba75;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Submit Your Information</h2>
+        <h2>Job Application Form</h2>
         <form action="display.php" method="GET">
             <label for="name">Full Name:</label>
             <input type="text" id="name" name="name" required>
@@ -62,22 +62,54 @@
             <label for="email">Email Address:</label>
             <input type="email" id="email" name="email" required>
 
-            <label for="age">Age:</label>
-            <input type="number" id="age" name="age" min="1" max="120">
+            <label for="phone">Phone Number:</label>
+            <input type="phone" id="phone" name="phone" required>
 
-            <label for="topic">Favorite Topic:</label>
+            
+            <label for="age">Age:</label>
+                   <input type="date" 
+    
+       max="2008-01-01" 
+       min="1958-12-31" required>
+
+
+  
+<!-- 
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" min="1" max="120" required> -->
+
+               <label for="address">Address:</label>
+            <input type="address" id="address" name="address" required>
+
+            <label for="topic">Gender:</label>
             <select id="topic" name="topic">
-                <option value="Web Development">Web Development</option>
-                <option value="Artificial Intelligence">Artificial Intelligence</option>
-                <option value="Cybersecurity">Cybersecurity</option>
-                <option value="Cloud Computing">Cloud Computing</option>
-                <option value="Data Science">Data Science</option>
+                <option value="" disabled selected></option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
             </select>
 
-            <label for="message">Message (optional):</label>
-            <input type="text" id="message" name="message" placeholder="Anything you'd like to add">
+            <label for="job">Desired Job Title:</label>
+            <input type="text" id="job" name="job" required>
 
-            <button type="submit">Send Data via GET</button>
+              <label for="available">Availability:</label>
+            <select id="available" name="available">
+                  <option value="" disabled selected></option>
+                <option value="Fulltime">Full-time</option>
+                <option value="Parttime">Part-time</option>
+            </select>
+               <label for="locate">Willingness To Relocate:</label>
+            <select id="locate" name="locate">
+                 <option value="" disabled selected></option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+
+
+            <label for="message">Message (optional):</label>
+            <input type="text" id="message" name="message" placeholder="Notes">
+
+            <button type="submit">Submit</button>
         </form>
     </div>
 </body>
